@@ -1,0 +1,120 @@
+chmod 400 test-key-pair.pem
+
+ssh -i test-key-pair.pem ec2-user@52.72.128.48
+
+
+cd ~
+curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash – (not worked)
+
+
+curl -sL https://deb.nodesource.com/setup_14.x
+
+
+bash
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+
+
+. ~/.nvm/nvm.sh
+
+nvm install –lts
+
+mkdir ~/.npm-global
+
+npm config set prefix '~/.npm-global'
+
+sudo nano ~/.profile
+
+sudo yum install git -y
+
+
+git clone https://github.com/rahul1004324/strapiTest.git
+
+npm install
+
+NODE_ENV=production npm run build
+
+
+
+npm install pm2@latest -g
+
+
+npm install pm2 -g
+
+strapi project run, develop & build command on npm
+-	npm run start
+-	npm run develop 
+-	nohup npm run develop 
+-	npm run build
+
+
+node
+
+crypto.randomBytes(16).toString('base64')
+
+
+nano .env
+Endpoint
+
+
+strapidb.cvhbodzwj75y.us-east-1.rds.amazonaws.com
+
+Port
+5432
+
+
+
+
+
+
+S3 setup for strapi 
+
+npm install @strapi/provider-upload-aws-s3
+
+create or edit class plugins.js (‘file name should be as it is’)
+
+
+module.exports = ({ env }) => ({
+  upload: {
+    config: {
+      provider: 'aws-s3',
+      providerOptions: {
+        accessKeyId: env('AWS_ACCESS_KEY_ID'),
+        secretAccessKey: env('AWS_ACCESS_SECRET'),
+        region: env('AWS_REGION'),
+        params: {
+            Bucket: env('AWS_BUCKET_NAME'),
+        },
+      },
+      // These parameters could solve issues with ACL public-read access — see [this issue](https://github.com/strapi/strapi/issues/5868) for details
+      actionOptions: {
+        upload: {
+          ACL: null
+        },
+        uploadStream: {
+          ACL: null
+        },
+      }
+    },
+  }
+});
+Make required changes in .env file :-
+
+DATABASE_HOST=your-unique-url.rds.amazonaws.com
+DATABASE_PORT=5432
+DATABASE_NAME=strapi
+DATABASE_USERNAME=postgres
+DATABASE_PASSWORD=Password
+AWS_ACCESS_KEY_ID=aws-access-key-id
+AWS_ACCESS_SECRET=aws-access-secret
+AWS_REGION=aws-region
+AWS_BUCKET_NAME=my-project-bucket-name
+
+Points to note – 
+
+Bucket settings > Block all public access – off
+
+Go to Bucket > Permissions Tab > acls enabled & Bucket owner preferred checked
+
+
+Try uploading media into media library & copy link & check . The link should be of S3 & the media should get uploaded to the designated bucket.
