@@ -8,6 +8,7 @@ module.exports = ({ env }) => ({
           region: 'ap-south-1',
           params: {
               Bucket: 'rahul1493',
+	      Folder:'rahul1493/strapi/',
           },
         },
 
@@ -19,18 +20,17 @@ module.exports = ({ env }) => ({
 
       }},
 	email: {
-    provider: env('EMAIL_PROVIDER'),
-    providerOptions: {
-      host: env('EMAIL_SMTP_HOST', 'smtp.example.com'),
-      port: env('EMAIL_SMTP_PORT', 587),
-      auth: {
-        user: env('EMAIL_SMTP_USER'),
-        pass: env('EMAIL_SMTP_PASS'),
+        config: {
+          provider: 'amazon-ses',
+          providerOptions: {
+            key: env('AWS_ACCESS_KEY_ID'),
+            secret: env('AWS_ACCESS_SECRET'),
+            amazon: 'https://email.ap-south-1.amazonaws.com',
+          },
+          settings: {
+            defaultFrom: 'rahulyadav1493@gmail.com',
+            defaultReplyTo: 'rahulyadav1493@gmail.com',
+          },
+        },
       },
-    },
-    settings: {
-      defaultFrom: env('EMAIL_ADDRESS_FROM'),
-      defaultReplyTo: env('EMAIL_ADDRESS_REPLY'),
-    },
-  },
   });
